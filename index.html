@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b13">
+<title>Pedidos | Controle</title>
+<style>
+:root{color-scheme:dark;--bg:#080b13;--panel:#111827;--field:#0d1321;--line:#202b40;--text:#e7edf8;--muted:#8798b8;--blue:#2563eb;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}header{padding:22px 18px 14px;border-bottom:1px solid var(--line);background:#0a0e18;position:sticky;top:0;z-index:2}header h1{font-size:20px;margin:0 0 5px}header p{margin:0;color:var(--muted);font-size:12px}.wrap{max-width:760px;margin:auto;padding:18px 14px 100px}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 auto 22px;max-width:760px}.tab{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:13px 8px;border-radius:12px;font-weight:650}.tab.active{background:#17264a;border-color:#2d4d91;color:white}.section-title{font-size:11px;letter-spacing:2px;color:#9badd0;border-bottom:1px solid var(--line);padding:7px 0;margin:22px 0 12px;text-transform:uppercase}.field{margin:0 0 15px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}input,textarea,select{width:100%;border:1px solid var(--line);border-radius:9px;background:var(--field);color:var(--text);padding:12px;font:inherit;outline:none}input:focus,textarea:focus,select:focus{border-color:#4779df}textarea{min-height:110px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:10px;padding:12px 15px;font-weight:700;font-size:14px;cursor:pointer;color:white;background:var(--blue)}.btn.secondary{background:#253148}.btn.success{background:var(--green)}.btn.danger{background:#51202a;color:#ffcbd1}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1}.hidden{display:none!important}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 10px}.stat span{display:block;font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:23px;margin-top:4px}.filters{display:flex;gap:8px;margin-bottom:14px}.filters button{flex:1}.order{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px;margin-bottom:12px}.order-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.order h3{margin:0 0 5px;font-size:16px;overflow-wrap:anywhere}.order p{margin:7px 0;color:#c1cce0;line-height:1.45;overflow-wrap:anywhere}.meta{font-size:12px;color:var(--muted)}.status{font-size:11px;font-weight:700;border-radius:30px;padding:5px 9px;white-space:nowrap;background:#392d16;color:#facc75}.status.done{background:#143b2a;color:#86efac}.order .actions{margin-top:13px}.empty{text-align:center;padding:35px 12px;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.notice{font-size:11px;line-height:1.5;color:var(--muted);margin-top:18px}.topline{display:flex;justify-content:space-between;align-items:center;gap:10px}.topline h2{font-size:17px;margin:0 0 14px}@media(max-width:480px){.grid{grid-template-columns:1fr;gap:0}.stats{gap:6px}.stat{padding:11px 8px}.stat strong{font-size:20px}.wrap{padding-left:11px;padding-right:11px}}
+</style>
+</head>
+<body>
+<header><h1>Controle de Pedidos</h1><p>Cadastro e acompanhamento de solicitações</p></header>
+<main class="wrap">
+<nav class="tabs"><button class="tab active" data-tab="entrada">＋ Entrada</button><button class="tab" data-tab="monitoramento">▤ Monitoramento</button></nav>
+<section id="entrada">
+<div class="section-title">Dados do cliente</div>
+<form id="orderForm">
+<input type="hidden" id="editId">
+<div class="field"><label for="cliente">Nome do cliente *</label><input id="cliente" required maxlength="120" placeholder="Nome ou empresa"></div>
+<div class="field"><label for="cnpj">CNPJ</label><input id="cnpj" inputmode="numeric" maxlength="18" placeholder="00.000.000/0000-00"></div>
+<div class="grid">
+<div class="field"><label for="telefone">Telefone / WhatsApp</label><input id="telefone" type="tel" maxlength="30" placeholder="(00) 00000-0000"></div>
+<div class="field"><label for="email">E-mail</label><input id="email" type="email" maxlength="120" placeholder="cliente@email.com"></div>
+</div>
+<div class="field"><label for="empresa">Empresa / setor</label><input id="empresa" maxlength="120" placeholder="Opcional"></div>
+<div class="section-title">Detalhes do pedido</div>
+<div class="field"><label for="titulo">Título do pedido *</label><input id="titulo" required maxlength="150" placeholder="Resumo do que precisa ser feito"></div>
+<div class="field"><label for="descricao">Descrição do que o cliente deseja *</label><textarea id="descricao" required maxlength="4000" placeholder="Descreva o pedido, requisitos e detalhes importantes..."></textarea></div>
+<div class="grid">
+<div class="field"><label for="prazo">Prazo desejado</label><input id="prazo" type="date"></div>
+<div class="field"><label for="responsavel">Responsável</label><input id="responsavel" maxlength="120" placeholder="Pessoa responsável"></div>
+</div>
+<div class="field"><label for="prioridade">Prioridade</label><select id="prioridade"><option value="Normal">Normal</option><option value="Alta">Alta</option><option value="Urgente">Urgente</option></select></div>
+<div class="actions"><button class="btn" id="saveBtn" type="submit">Salvar pedido</button><button class="btn secondary hidden" id="cancelEdit" type="button">Cancelar edição</button><button class="btn secondary" type="reset" id="clearBtn">Limpar</button></div>
+</form>
+<p class="notice">Os pedidos ficam salvos neste navegador. Para compartilhar os mesmos pedidos entre diferentes dispositivos ou usuários, será necessário conectar o site a um banco de dados.</p>
+</section>
+<section id="monitoramento" class="hidden">
+<div class="stats"><div class="stat"><span>Total</span><strong id="totalCount">0</strong></div><div class="stat"><span>Pendentes</span><strong id="pendingCount">0</strong></div><div class="stat"><span>Concluídos</span><strong id="doneCount">0</strong></div></div>
+<div class="field"><label for="search">Buscar pedido ou cliente</label><input id="search" placeholder="Digite um nome, título ou palavra..."></div>
+<div class="filters"><button class="btn secondary" data-filter="todos">Todos</button><button class="btn secondary" data-filter="pendentes">Pendentes</button><button class="btn secondary" data-filter="concluidos">Concluídos</button></div>
+<div id="ordersList"></div>
+</section>
+</main>
+<script>
+const KEY="controle_pedidos_v1";
+let orders=loadOrders(),filter="todos";
+const $=id=>document.getElementById(id);
+function loadOrders(){try{const x=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(x)?x:[]}catch{return []}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(orders))}
+function showTab(name){document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));$("entrada").classList.toggle("hidden",name!=="entrada");$("monitoramento").classList.toggle("hidden",name!=="monitoramento");if(name==="monitoramento")render()}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+function val(id){return $(id).value.trim()}
+function resetForm(){ $("orderForm").reset();$("editId").value="";$("saveBtn").textContent="Salvar pedido";$("cancelEdit").classList.add("hidden")}
+$("orderForm").addEventListener("submit",e=>{e.preventDefault();const id=$("editId").value;const previous=orders.find(o=>o.id===id);const item={id:id||String(Date.now())+"-"+Math.random().toString(16).slice(2),cliente:val("cliente"),cnpj:val("cnpj"),telefone:val("telefone"),email:val("email"),empresa:val("empresa"),titulo:val("titulo"),descricao:val("descricao"),prazo:val("prazo"),responsavel:val("responsavel"),prioridade:val("prioridade"),criado:previous?.criado||new Date().toISOString(),concluido:previous?.concluido||false};if(previous)orders=orders.map(o=>o.id===id?item:o);else orders.unshift(item);persist();resetForm();render();showTab("monitoramento")});
+$("cancelEdit").addEventListener("click",resetForm);$("clearBtn").addEventListener("click",()=>setTimeout(resetForm,0));$("search").addEventListener("input",render);
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("success",x===b));render()}));
+function escapeHtml(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function dateText(s){if(!s)return "Não informado";const [y,m,d]=s.split("-");return `${d}/${m}/${y}`}
+function render(){const pending=orders.filter(o=>!o.concluido).length,done=orders.length-pending;$("totalCount").textContent=orders.length;$("pendingCount").textContent=pending;$("doneCount").textContent=done;const q=val("search").toLocaleLowerCase("pt-BR");const shown=orders.filter(o=>(filter==="todos"||(filter==="pendentes"&&!o.concluido)||(filter==="concluidos"&&o.concluido))&&[o.cliente,o.cnpj,o.titulo,o.descricao,o.empresa,o.responsavel].some(v=>(v||"").toLocaleLowerCase("pt-BR").includes(q)));if(!shown.length){$("ordersList").innerHTML='<div class="empty">Nenhum pedido encontrado.</div>';return}$("ordersList").innerHTML=shown.map(o=>`<article class="order"><div class="order-top"><div><h3>${escapeHtml(o.titulo)}</h3><div class="meta">${escapeHtml(o.cliente)} · Criado em ${new Date(o.criado).toLocaleDateString("pt-BR")}</div></div><span class="status ${o.concluido?"done":""}">${o.concluido?"Concluído":"Pendente"}</span></div><p>${escapeHtml(o.descricao)}</p><p class="meta">Prioridade: ${escapeHtml(o.prioridade)}${o.prazo?" · Prazo: "+dateText(o.prazo):""}${o.responsavel?" · Responsável: "+escapeHtml(o.responsavel):""}</p><p class="meta">${o.cnpj?"CNPJ: "+escapeHtml(o.cnpj)+" · ":""}${o.telefone?"Telefone: "+escapeHtml(o.telefone)+" · ":""}${o.email?"E-mail: "+escapeHtml(o.email):""}${o.empresa?" · Empresa: "+escapeHtml(o.empresa):""}</p><div class="actions"><button class="btn ${o.concluido?"secondary":"success"}" data-action="toggle" data-id="${o.id}">${o.concluido?"Reabrir pedido":"Marcar concluído"}</button><button class="btn secondary" data-action="edit" data-id="${o.id}">Editar</button><button class="btn danger" data-action="delete" data-id="${o.id}">Excluir</button></div></article>`).join("");$("ordersList").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>handleAction(b.dataset.action,b.dataset.id)))}
+function handleAction(action,id){const o=orders.find(x=>x.id===id);if(!o)return;if(action==="toggle"){o.concluido=!o.concluido;persist();render()}if(action==="delete"){if(confirm("Deseja excluir este pedido?")){orders=orders.filter(x=>x.id!==id);persist();render()}}if(action==="edit"){showTab("entrada");$("editId").value=o.id;["cliente","cnpj","telefone","email","empresa","titulo","descricao","prazo","responsavel"].forEach(k=>$(k).value=o[k]||"");$("prioridade").value=o.prioridade||"Normal";$("saveBtn").textContent="Salvar alterações";$("cancelEdit").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}}
+render();
+</script>
+</body>
+</html>
