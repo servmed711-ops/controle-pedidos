@@ -10,7 +10,7 @@
 <section id="monitoramento" class="hidden"><div class="stats"><div class="stat"><span>Total</span><strong id="total">0</strong></div><div class="stat"><span>Pendentes</span><strong id="pending">0</strong></div><div class="stat"><span>Concluídos</span><strong id="completed">0</strong></div></div><div class="panel"><label for="search">Buscar pedido ou cliente</label><input id="search" placeholder="Digite para buscar"><div class="tabs" style="margin-top:10px"><button class="secondary" data-filter="todos">Todos</button><button class="secondary" data-filter="pendentes">Pendentes</button><button class="secondary" data-filter="concluidos">Concluídos</button></div></div><div id="orders"></div></section><p class="notice">Pedidos compartilhados pelo banco de dados Supabase.</p></div></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 // COLE SUA API URL E SUA PUBLISHABLE KEY NAS DUAS LINHAS ABAIXO
-const SUPABASE_URL = "https://cknxohaeehlamutakpsp.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://cknxohaeehlamutakpsp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_5rd9UdS5_O0EV4ex0NNwSQ_7BHCmp6q";
 const $=id=>document.getElementById(id);let db,orders=[],filter='todos';
 function err(msg){$('loginMsg').textContent=msg}
